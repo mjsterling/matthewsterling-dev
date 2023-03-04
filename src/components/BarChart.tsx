@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 // svg viewBox prop is like width/height but allows it to be responsive rather than fixed dimensions. think of it like an aspect ratio
 // all pixel values inside the svg (height, width, padding etc) are now based on the viewbox, not the actual pixel size

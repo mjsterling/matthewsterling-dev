@@ -1,5 +1,5 @@
 import gsap from 'gsap';
-import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar } from '../components/Avatar';
 import { BarChart } from '../components/BarChart';
