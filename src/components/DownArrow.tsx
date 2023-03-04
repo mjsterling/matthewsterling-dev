@@ -1,15 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
-
 export const DownArrow = ({ show }: { show: boolean }) => {
-  const [scrollPos, setScrollPos] = useState(0);
-  const updateScrollPos = useCallback(() => {
-    setScrollPos(document.body.scrollTop);
-  }, []);
-  console.log(scrollPos);
-  useEffect(() => {
-    window.onscroll = updateScrollPos;
-  }, [updateScrollPos]);
-
   return (
     <svg
       width="32"
@@ -17,7 +6,7 @@ export const DownArrow = ({ show }: { show: boolean }) => {
       viewBox="0 0 32 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="animate-bounce fixed bottom-8 pointer-events-none transition-opacity"
+      className="animate-bounce fixed bottom-7 pointer-events-none transition-opacity"
       style={{ left: `calc(50vw - 16px)`, opacity: +show }}
     >
       <g filter="url(#filter0_d_1403_1780)">

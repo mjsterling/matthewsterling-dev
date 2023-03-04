@@ -4,7 +4,10 @@
 
 @layer base {
   html {
-    @apply bg-black m-0 p-0;
+    @apply bg-black m-0 p-0 overflow-x-hidden;
+  }
+  body {
+    @apply gradient-background bg-fixed;
   }
   h1,
   h2,
