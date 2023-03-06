@@ -97,7 +97,7 @@ export const Home = () => {
       <Menu open={menuOpen} />
       <div
         ref={innerRef}
-        className="w-screen absolute max-w-[800px]"
+        className="w-screen absolute max-w-[800px] z-10"
         style={{
           height: '301vh',
           left: Math.max(0, window.innerWidth * 0.5 - 400),
