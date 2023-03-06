@@ -38,7 +38,7 @@ export const Home = () => {
   useEffect(() => {
     t1.current = gsap.timeline({
       scrollTrigger: {
-        pin: true,
+        pin: mainRef.current,
         pinSpacing: true,
         scrub: 1,
         trigger: mainRef.current,
@@ -80,7 +80,9 @@ export const Home = () => {
   return (
     <main
       ref={mainRef}
-      className="w-screen h-screen overflow-hidden fixed top-0"
+      id="viewport"
+      className="w-screen overflow-hidden"
+      style={{ height: window.innerHeight + 60 }}
     >
       <div
         className="absolute left-7 top-7 transition-opacity z-50 "
@@ -95,9 +97,9 @@ export const Home = () => {
       <Menu open={menuOpen} />
       <div
         ref={innerRef}
-        className="z-10 absolute top-0 w-screen max-w-[800px]"
+        className="w-screen absolute max-w-[800px]"
         style={{
-          height: '300vh',
+          height: '301vh',
           left: Math.max(0, window.innerWidth * 0.5 - 400),
           maxWidth: '800px',
         }}

@@ -6,7 +6,7 @@ export const DownArrow = ({ show }: { show: boolean }) => {
       viewBox="0 0 32 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="animate-bounce fixed bottom-7 pointer-events-none transition-opacity"
+      className="animate-bounce fixed bottom-14 pointer-events-none transition-opacity"
       style={{ left: `calc(50vw - 16px)`, opacity: +show }}
     >
       <g filter="url(#filter0_d_1403_1780)">

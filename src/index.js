@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
+ScrollTrigger.config({
+  autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load',
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);

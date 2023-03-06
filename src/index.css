@@ -2,12 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+#viewport {
+  background: linear-gradient(
+    170.9deg,
+    rgb(0, 110, 178) -93.1%,
+    rgb(36, 5, 71) 100%
+  );
+  background-attachment: fixed;
+}
+
 @layer base {
   html {
-    @apply bg-black m-0 p-0 overflow-x-hidden;
+    @apply m-0 p-0 overflow-x-hidden;
   }
   body {
-    @apply gradient-background bg-fixed;
+    @apply bg-fixed;
   }
   h1,
   h2,
@@ -15,13 +24,5 @@
   h5,
   p {
     font-family: 'Comfortaa', sans-serif;
-  }
-
-  .gradient-background {
-    background: linear-gradient(
-      170.9deg,
-      rgba(0, 157, 255, 0.7) -93.1%,
-      rgba(50, 7, 99, 0.7) 100%
-    );
   }
 }
