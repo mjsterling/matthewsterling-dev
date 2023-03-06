@@ -74,8 +74,9 @@ export const Avatar = forwardRef<SVGGElement>((props, ref) => {
           pathLength={1}
           d="M3088.53 2117.08L3088.54 2117.08C3131.7 2117.07 3166.73 2152.08 3166.73 2195.28C3166.73 2238.46 3131.7 2273.49 3088.53 2273.49C3045.36 2273.49 3010.33 2238.46 3010.33 2195.28C3010.33 2152.09 3045.35 2117.08 3088.53 2117.08Z"
           // stroke="url(#paint0_linear_1422_760)"
-          stroke="#009DFFAA"
+          stroke="#009DFF"
           stroke-width="75"
+          strokeOpacity={0.8}
         />
         <path
           pathLength={1}
@@ -87,7 +88,8 @@ export const Avatar = forwardRef<SVGGElement>((props, ref) => {
           pathLength={1}
           d="M1975.47 2117.08L1975.48 2117.08C2018.64 2117.07 2053.67 2152.08 2053.67 2195.28C2053.67 2238.46 2018.64 2273.49 1975.47 2273.49C1932.3 2273.49 1897.27 2238.46 1897.27 2195.28C1897.27 2152.09 1932.29 2117.08 1975.47 2117.08Z"
           // stroke="url(#paint1_linear_1422_760)"
-          stroke="#009DFFAA"
+          stroke="#009DFF"
+          strokeOpacity={0.8}
           stroke-width="75"
         />
         <path

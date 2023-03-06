@@ -49,12 +49,12 @@ export const Home = () => {
     // screen 1
     t1.current
       .to(text1Ref.current, { top: '10vh', duration: 2 })
-      .to(avatarRef.current, { strokeDashoffset: 0, duration: 6 });
+      .to(avatarRef.current, { strokeDashoffset: 0, duration: 3 });
     text2Refs.current.forEach((ref, i) => {
       t1.current?.to(
         ref,
         { opacity: 1, duration: 2 / text2Refs.current.length },
-        3 + (2 / text2Refs.current.length) * i
+        2 + (2 / text2Refs.current.length) * i
       );
     });
     t1.current.to(innerRef.current, { top: '-100vh', duration: 2 }, '+=2');
@@ -64,17 +64,17 @@ export const Home = () => {
       .to(
         cardRefs.current[0],
         { left: '-100vw', opacity: 0, duration: 2 },
-        '+=2'
+        '+=1'
       )
       .to(cardRefs.current[1], { left: '0', opacity: 1, duration: 2 }, '-=2')
-      .to(
-        cardRefs.current[1],
-        { left: '-100vw', opacity: 0, duration: 2 },
-        '+=2'
-      )
+      .to(cardRefs.current[1], { left: '-100vw', opacity: 0, duration: 2 })
       .to(cardRefs.current[2], { left: '0', opacity: 1, duration: 2 }, '-=2')
-      .to(innerRef.current, { top: '-200vh', duration: 2 }, '+=2')
-      .to(menuButtonRef.current, { opacity: 0, pointerEvents: 'none' }, '-=2');
+      .to(innerRef.current, { top: '-200vh', duration: 2 }, '+=1')
+      .to(
+        menuButtonRef.current,
+        { opacity: 0, pointerEvents: 'none', duration: 0.5 },
+        '-=2'
+      );
   }, [mainRef, innerRef, text1Ref, text2Refs, cardRefs, t1, avatarRef]);
 
   return (
@@ -109,7 +109,7 @@ export const Home = () => {
           className="px-7 min-w-full] absolute flex flex-col justify-center items-start gap-2 w-full h-[100px] max-h-[100px]"
           style={{ top: `calc(50vh - 50px)`, left: 0 }}
         >
-          <p className="text-white text-xl">Hi, I'm</p>
+          <p className="text-white text-xl">Hi! I'm</p>
           <h1 className="text-4xl font-bold text-secondary-500">
             Matthew Sterling.
           </h1>
