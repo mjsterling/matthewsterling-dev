@@ -49,12 +49,12 @@ export const Home = () => {
     // screen 1
     t1.current
       .to(text1Ref.current, { top: '10vh', duration: 2 })
-      .to(avatarRef.current, { strokeDashoffset: 0, duration: 8 });
+      .to(avatarRef.current, { strokeDashoffset: 0, duration: 6 });
     text2Refs.current.forEach((ref, i) => {
       t1.current?.to(
         ref,
         { opacity: 1, duration: 2 / text2Refs.current.length },
-        6 + (2 / text2Refs.current.length) * i
+        3 + (2 / text2Refs.current.length) * i
       );
     });
     t1.current.to(innerRef.current, { top: '-100vh', duration: 2 }, '+=2');
