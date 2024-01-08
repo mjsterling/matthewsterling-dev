@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { Data } from './Chart';
 
 // svg viewBox prop is like width/height but allows it to be responsive rather than fixed dimensions. think of it like an aspect ratio
 // all pixel values inside the svg (height, width, padding etc) are now based on the viewbox, not the actual pixel size
@@ -6,13 +7,13 @@ const width = 400;
 const padding = 20;
 const domainPadding = 10;
 const barHeight = 35;
-export const BarChart = () => {
-  const [data, setData] = useState<Data>([
-    { label: 'A', value: 2, color: '#beb0ff' },
-    { label: 'B', value: 4, color: '#9c81ff' },
-    { label: 'C', value: 6, color: '#8750ff' },
-    { label: 'D', value: 8, color: '#7f28ff' },
-  ]);
+export const BarChart = ({
+  data,
+  setData,
+}: {
+  data: Data;
+  setData: React.Dispatch<React.SetStateAction<Data>>;
+}) => {
   const validData = data.filter(({ value }) => value > 0);
   const height = validData.length * 50 + padding * 2;
 
@@ -27,7 +28,6 @@ export const BarChart = () => {
         </g>
         <BarsWithLabels data={validData} maxData={maxData} />
       </svg>
-      <Inputs data={data} setData={setData} />
     </>
   );
 };
@@ -140,44 +140,3 @@ const BarsWithLabels = ({
     ))}
   </>
 );
-
-const Inputs = ({
-  data,
-  setData,
-}: {
-  data: Data;
-  setData: React.Dispatch<React.SetStateAction<Data>>;
-}) => (
-  <div className="flex flex-col w-full p-2 gap-4">
-    <div className="w-full flex justify-between">
-      {data.map((datum, i) => (
-        <div className="flex gap-2">
-          <p className="text-white text-base font-sans">{datum.label}:</p>
-          <input
-            value={datum.value}
-            className="text-secondary-500 pl-1 w-10 rounded-sm border border-white bg-transparent"
-            onChange={(e) => {
-              setData([
-                ...data.slice(0, i),
-                {
-                  ...data[i],
-                  value: Number(e.currentTarget.value.replace(/\D/g, '')),
-                },
-                ...data.slice(i + 1),
-              ]);
-            }}
-          />
-        </div>
-      ))}
-    </div>
-    <p className="animate-bounce text-white text-xs w-full text-center">
-      Change me!
-    </p>
-  </div>
-);
-
-type Data = {
-  color: string;
-  value: number;
-  label: string;
-}[];

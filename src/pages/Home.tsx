@@ -8,6 +8,10 @@ import { DownArrow } from '../components/DownArrow';
 import { Menu } from '../components/Menu';
 import { MenuButton } from '../components/MenuButton';
 import { Socials } from '../components/Socials';
+import { CustomAnimation } from '../components/CustomAnimation';
+import PhoneIcon from '../assets/PhoneIcon.svg';
+import EmailIcon from '../assets/EmailIcon.svg';
+import { Chart } from '../components/Chart';
 
 export const Home = () => {
   const mainRef = useRef<HTMLDivElement | null>(null);
@@ -21,6 +25,8 @@ export const Home = () => {
   const [showArrow, setShowArrow] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLDivElement | null>(null);
+  const [showPhoneNumber, setShowPhoneNumber] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
 
   const updateShowArrow = useCallback(() => {
     if (document.documentElement.scrollTop > 0 && showArrow) {
@@ -57,7 +63,7 @@ export const Home = () => {
         2 + (2 / text2Refs.current.length) * i
       );
     });
-    t1.current.to(innerRef.current, { top: '-100vh', duration: 2 }, '+=2');
+    t1.current.to(innerRef.current, { top: '-100vh', duration: 2 });
 
     // screen 2
     t1.current
@@ -67,14 +73,14 @@ export const Home = () => {
         '+=1'
       )
       .to(cardRefs.current[1], { left: '0', opacity: 1, duration: 2 }, '-=2')
-      .to(cardRefs.current[1], { left: '-100vw', opacity: 0, duration: 2 })
-      .to(cardRefs.current[2], { left: '0', opacity: 1, duration: 2 }, '-=2')
-      .to(innerRef.current, { top: '-200vh', duration: 2 }, '+=1')
-      .to(
-        menuButtonRef.current,
-        { opacity: 0, pointerEvents: 'none', duration: 0.5 },
-        '-=2'
-      );
+      // .to(cardRefs.current[1], { left: '-100vw', opacity: 0, duration: 2 })
+      // .to(cardRefs.current[2], { left: '0', opacity: 1, duration: 2 }, '-=2')
+      .to(innerRef.current, { top: '-200vh', duration: 2 }, '+=1');
+    // .to(
+    //   menuButtonRef.current,
+    //   { opacity: 0, pointerEvents: 'none', duration: 0.5 },
+    //   '-=2'
+    // );
   }, [mainRef, innerRef, text1Ref, text2Refs, cardRefs, t1, avatarRef]);
 
   return (
@@ -84,7 +90,7 @@ export const Home = () => {
       className="w-screen overflow-hidden"
       style={{ height: window.innerHeight + 60 }}
     >
-      <div
+      {/* <div
         className="absolute left-7 top-7 transition-opacity z-50 "
         ref={menuButtonRef}
       >
@@ -93,8 +99,8 @@ export const Home = () => {
           setOpen={setMenuOpen}
           visible={!showArrow}
         />
-      </div>
-      <Menu open={menuOpen} />
+      </div> */}
+      {/* <Menu open={menuOpen} /> */}
       <div
         ref={innerRef}
         className="w-screen absolute max-w-[800px] z-10"
@@ -152,52 +158,60 @@ export const Home = () => {
               <h2 className="text-secondary-500 font-bold text-[26px]">
                 Dynamic SVG charts
               </h2>
-              <BarChart />
+              <Chart />
             </div>
             <div
               ref={(el) => (cardRefs.current[1] = el)}
               className={styles.specialtyCard}
             >
               <h2 className="text-secondary-500 font-bold text-[26px]">
-                Web applications
-                {/* some kind of UI layout? */}
-              </h2>
-              <div className="m-auto h-4/5 w-full"></div>
-            </div>
-            <div
-              ref={(el) => (cardRefs.current[2] = el)}
-              className={styles.specialtyCard}
-            >
-              <h2 className="text-secondary-500 font-bold text-[26px]">
                 Custom animation
-                {/* no idea what to do for this */}
+                <CustomAnimation />
               </h2>
             </div>
           </div>
         </div>
         <div className="top-[200vh] w-full h-screen transition-all p-7 pt-[105px] left-0 absolute z-10 flex flex-col justify-between">
-          <p className="text-white text-xl w-full text-center">
+          <h3 className="text-secondary-500 text-xl w-full text-center pt-2">
             Want to know more?
-          </p>
-          <div className="h-1/2 justify-evenly flex flex-col w-full items-center">
-            <Link
-              className="text-xl text-white hover:opacity-80 transition-opacity"
-              to="/cv"
-            >
-              <Button variant="primary">View my CV</Button>
-            </Link>
-            <Link
-              className="text-xl text-white hover:opacity-80 transition-opacity"
-              to="/projects"
-            >
-              <Button variant="secondary">Check out my projects</Button>
-            </Link>
-            <Link
-              className="text-xl text-white hover:opacity-80 transition-opacity"
-              to="/contact"
-            >
-              <Button variant="green">Send me a message</Button>
-            </Link>
+          </h3>
+          <div className="h-1/3 justify-evenly flex flex-col w-full items-center">
+            <div className="text-white rounded-lg p-4 w-full flex gap-2 justify-center items-center">
+              <img style={{ height: '24px' }} src={PhoneIcon} />
+              {showPhoneNumber ? (
+                <Link
+                  className="text-xl text-white hover:opacity-80 transition-opacity underline"
+                  to="tel:+61403121209"
+                >
+                  0403 121 209
+                </Link>
+              ) : (
+                <button
+                  className="underline text-white text-xl"
+                  onClick={() => setShowPhoneNumber(true)}
+                >
+                  Click to show number
+                </button>
+              )}
+            </div>
+            <div className="text-white rounded-lg p-4 w-full flex gap-2 justify-center items-center">
+              <img style={{ height: '24px' }} src={EmailIcon} />
+              {showEmail ? (
+                <Link
+                  className="text-xl text-white hover:opacity-80 transition-opacity underline"
+                  to="mailto:mjsterling93@gmail.com"
+                >
+                  mjsterling93@gmail.com
+                </Link>
+              ) : (
+                <button
+                  className="underline text-white text-xl"
+                  onClick={() => setShowEmail(true)}
+                >
+                  Click to show email
+                </button>
+              )}
+            </div>
           </div>
           <Socials />
         </div>
