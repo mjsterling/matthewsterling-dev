@@ -2,13 +2,8 @@ import gsap from 'gsap';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar } from '../components/Avatar';
-import { BarChart } from '../components/BarChart';
-import { Button } from '../components/Button';
 import { DownArrow } from '../components/DownArrow';
-import { Menu } from '../components/Menu';
-import { MenuButton } from '../components/MenuButton';
 import { Socials } from '../components/Socials';
-import { CustomAnimation } from '../components/CustomAnimation';
 import PhoneIcon from '../assets/PhoneIcon.svg';
 import EmailIcon from '../assets/EmailIcon.svg';
 import { Chart } from '../components/Chart';
@@ -23,8 +18,8 @@ export const Home = () => {
   const t1 = useRef<gsap.core.Timeline | null>(null);
   const avatarRef = useRef<SVGGElement | null>(null);
   const [showArrow, setShowArrow] = useState(true);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuButtonRef = useRef<HTMLDivElement | null>(null);
+  // const [menuOpen, setMenuOpen] = useState(false);
+  // const menuButtonRef = useRef<HTMLDivElement | null>(null);
   const [showPhoneNumber, setShowPhoneNumber] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
 
@@ -179,7 +174,11 @@ export const Home = () => {
               Want to get in touch?
             </h3>
             <div className="text-white rounded-lg p-4 w-full flex gap-2 justify-center items-center">
-              <img style={{ height: '24px' }} src={PhoneIcon} />
+              <img
+                style={{ height: '24px' }}
+                src={PhoneIcon}
+                alt="Phone number"
+              />
               {showPhoneNumber ? (
                 <Link
                   className="text-xl text-white hover:opacity-80 transition-opacity underline"
@@ -197,7 +196,11 @@ export const Home = () => {
               )}
             </div>
             <div className="text-white rounded-lg p-4 w-full flex gap-2 justify-center items-center">
-              <img style={{ height: '24px' }} src={EmailIcon} />
+              <img
+                style={{ height: '24px' }}
+                src={EmailIcon}
+                alt="Email address"
+              />
               {showEmail ? (
                 <Link
                   className="text-xl text-white hover:opacity-80 transition-opacity underline"
