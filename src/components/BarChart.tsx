@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Data } from './Chart';
 
 // svg viewBox prop is like width/height but allows it to be responsive rather than fixed dimensions. think of it like an aspect ratio
@@ -7,15 +7,13 @@ const width = 400;
 const padding = 20;
 const domainPadding = 10;
 const barHeight = 35;
-export const BarChart = ({
-  data,
-  setData,
-}: {
-  data: Data;
-  setData: React.Dispatch<React.SetStateAction<Data>>;
-}) => {
+export const BarChart = ({ data }: { data: Data }) => {
   const validData = data.filter(({ value }) => value > 0);
   const height = validData.length * 50 + padding * 2;
+  const [scaleX, setScaleX] = useState(0.1);
+  useEffect(() => {
+    setScaleX(1);
+  }, []);
 
   const maxData = Math.max(...data.map((datum) => datum.value));
 
@@ -26,7 +24,7 @@ export const BarChart = ({
         <g>
           <AxisLabels height={height} maxData={maxData} />
         </g>
-        <BarsWithLabels data={validData} maxData={maxData} />
+        <BarsWithLabels data={validData} maxData={maxData} scaleX={scaleX} />
       </svg>
     </>
   );
@@ -58,7 +56,6 @@ const AxisLabels = ({
   maxData: number | undefined;
 }) => {
   if (!maxData) return null;
-  // cheat to get an array of ascending integers starting from 1
   const step =
     maxData < 10
       ? 1
@@ -69,6 +66,9 @@ const AxisLabels = ({
       : maxData < 500
       ? 50
       : 10 ** Math.floor(Math.log10(maxData));
+
+  // cheat to get an array of ascending integers starting from 1
+
   const indices = Array.from(new Array(10).keys())
     .map((n) => n * step)
     .slice(1);
@@ -103,9 +103,11 @@ const AxisLabels = ({
 const BarsWithLabels = ({
   data,
   maxData,
+  scaleX,
 }: {
   data: Data;
-  maxData: number | undefined;
+  maxData: number;
+  scaleX: number;
 }) => (
   <>
     {data.map((datum, i) => (
@@ -123,7 +125,11 @@ const BarsWithLabels = ({
           strokeWidth="1"
           x={padding + domainPadding}
           y={padding + i * 50}
-          style={{ transition: 'width 500ms ease-out' }}
+          style={{
+            transition: 'all 500ms ease-out',
+            transform: `scaleX(${scaleX})`,
+            transformOrigin: '25px 25px',
+          }}
         />
         <text
           fontSize="16"

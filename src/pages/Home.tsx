@@ -67,12 +67,12 @@ export const Home = () => {
 
     // screen 2
     t1.current
-      .to(
-        cardRefs.current[0],
-        { left: '-100vw', opacity: 0, duration: 2 },
-        '+=1'
-      )
-      .to(cardRefs.current[1], { left: '0', opacity: 1, duration: 2 }, '-=2')
+      // .to(
+      //   cardRefs.current[0],
+      //   { left: '-100vw', opacity: 0, duration: 2 },
+      //   '+=1'
+      // )
+      // .to(cardRefs.current[1], { left: '0', opacity: 1, duration: 2 }, '-=2')
       // .to(cardRefs.current[1], { left: '-100vw', opacity: 0, duration: 2 })
       // .to(cardRefs.current[2], { left: '0', opacity: 1, duration: 2 }, '-=2')
       .to(innerRef.current, { top: '-200vh', duration: 2 }, '+=1');
@@ -105,7 +105,7 @@ export const Home = () => {
         ref={innerRef}
         className="w-screen absolute max-w-[800px] z-10"
         style={{
-          height: '301vh',
+          height: '300vh',
           left: Math.max(0, window.innerWidth * 0.5 - 400),
           maxWidth: '800px',
         }}
@@ -147,7 +147,9 @@ export const Home = () => {
         </p>
         <div className="top-[100vh] p-7 left-0 absolute z-10 h-screen w-full flex flex-col justify-evenly">
           <p className="text-white text-xl w-full text-center" ref={text3Ref}>
-            I specialise in:
+            I specialise in{' '}
+            <span className="text-secondary-500">custom app UIs</span> and{' '}
+            <span className="text-secondary-500">dynamic SVGs</span>
           </p>
           <div className="h-[60%] w-full relative">
             <div
@@ -155,12 +157,9 @@ export const Home = () => {
               style={{ left: 0, opacity: 1 }}
               className={styles.specialtyCard}
             >
-              <h2 className="text-secondary-500 font-bold text-[26px]">
-                Dynamic SVG charts
-              </h2>
               <Chart />
             </div>
-            <div
+            {/* <div
               ref={(el) => (cardRefs.current[1] = el)}
               className={styles.specialtyCard}
             >
@@ -168,14 +167,17 @@ export const Home = () => {
                 Custom animation
                 <CustomAnimation />
               </h2>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="top-[200vh] w-full h-screen transition-all p-7 pt-[105px] left-0 absolute z-10 flex flex-col justify-between">
-          <h3 className="text-secondary-500 text-xl w-full text-center pt-2">
-            Want to know more?
-          </h3>
-          <div className="h-1/3 justify-evenly flex flex-col w-full items-center">
+          <div className="h-full justify-center gap-4 flex flex-col w-full items-center">
+            <h3
+              className="text-secondary-500 text-xl w-full text-center pt-2"
+              style={{ marginBottom: '24px' }}
+            >
+              Want to get in touch?
+            </h3>
             <div className="text-white rounded-lg p-4 w-full flex gap-2 justify-center items-center">
               <img style={{ height: '24px' }} src={PhoneIcon} />
               {showPhoneNumber ? (

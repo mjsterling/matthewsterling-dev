@@ -1,13 +1,12 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Data } from './Chart';
 
-export const PieChart = ({
-  data,
-  setData,
-}: {
-  data: Data;
-  setData: React.Dispatch<React.SetStateAction<Data>>;
-}) => {
+export const PieChart = ({ data }: { data: Data }) => {
+  const [scale, setScale] = useState(0);
+  useEffect(() => {
+    setScale(1);
+  }, []);
+
   const width = 400;
   const height = 280;
   const radius = 100;
@@ -23,8 +22,6 @@ export const PieChart = ({
 
   const degreesToRadians = (degrees: number) => (degrees * Math.PI) / 180;
 
-  const valueToPercentage = (value: number) => value / sumDataValues;
-
   const polarToCartesianCoords = (radius: number, angle: number) => ({
     x: radius * Math.cos(degreesToRadians(angle - 90)) + cx,
     y: radius * Math.sin(degreesToRadians(angle - 90)) + cy,
@@ -35,6 +32,9 @@ export const PieChart = ({
   const dataValues = extractValues(data);
 
   const sumDataValues = sum(dataValues);
+
+  const valueToPercentage = (value: number) =>
+    sumDataValues === 0 ? 0 : value / sumDataValues;
 
   const datapointsWithPolarCoords = data.map((datum, index) => {
     const startPercentage = valueToPercentage(sum(dataValues.slice(0, index)));
@@ -134,7 +134,17 @@ export const PieChart = ({
   return (
     <>
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full">
-        <PieSegments />
+        {filteredDatapoints.length ? (
+          <g
+            style={{
+              transform: `scale(${scale})`,
+              transition: 'all 500ms ease-in-out',
+              transformOrigin: `${cx}px ${cy}px`,
+            }}
+          >
+            <PieSegments />
+          </g>
+        ) : null}
         <Legend />
       </svg>
     </>
